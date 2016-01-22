@@ -44,6 +44,11 @@ function init_hal_bluetooth()
 			BTUART_PORT=/dev/ttyS1
 			brcm_patchram_plus -d --no2bytes --enable_hci --patchram /system/lib/firmware/brcm/bcm43241b4.hcd $BTUART_PORT
 			;;
+		MacBookPro8*)
+			rmmod b43
+			modprobe b43 btcoex=0
+			modprobe btusb
+			;;
 		*)
 			for bt in $(lsusb -v | awk ' /Class:.E0/ { print $9 } '); do
 				chown 1002.1002 $bt && chmod 660 $bt
