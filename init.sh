@@ -237,6 +237,9 @@ function create_pointercal()
 function init_tscal()
 {
 	case "$PRODUCT" in
+		ST70416-6*)
+			modprobe gslx680_ts_acpi
+			;&
 		T91|T101|ET2002|945GSE-ITE8712|CF-19[CDYFGKLP]*)
 			create_pointercal
 			return
@@ -366,6 +369,7 @@ function do_bootcomplete()
 			alsa_amixer -c $c set Capture 100%
 			alsa_amixer -c $c set Capture cap
 			alsa_amixer -c $c set PCM 100 unmute
+			alsa_amixer -c $c set SPO unmute
 			alsa_amixer -c $c set 'Mic Boost' 3
 			alsa_amixer -c $c set 'Internal Mic Boost' 3
 		fi
